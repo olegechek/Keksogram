@@ -19,7 +19,7 @@ const getRandomDigit = (minValue, maxValue) => {
   return (minValue + randomForDifference);
 }
 
-getRandomDigit(1,5);
+getRandomDigit(1, 5);
 
 
 
