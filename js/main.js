@@ -97,7 +97,7 @@ const getPhotoObjectArray = (numberOfObjects = 25) => {
 
 const NUMBER = 25;
 
-console.log(getPhotoObjectArray(NUMBER));
+getPhotoObjectArray(NUMBER);
 
 
 
