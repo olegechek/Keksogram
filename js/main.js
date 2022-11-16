@@ -1,7 +1,4 @@
-import { getPhotoObjectArray } from './data.js';
-
-getPhotoObjectArray();
-
+import './gallery.js'
 
 
 
