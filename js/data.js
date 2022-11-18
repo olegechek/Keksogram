@@ -67,5 +67,4 @@ const getPhotoObjectArray = () => {
   return finalArray;
 }
 
-
 export {getPhotoObjectArray};

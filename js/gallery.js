@@ -7,18 +7,23 @@ const pictureTemplate = document.querySelector('#picture').content.querySelector
 
 const pictureListFragment = document.createDocumentFragment();
 
-createPhotoArray.forEach(({ url, likes, comments }) => {
+createPhotoArray.forEach(({ url, likes, comments, description }) => {
 
   const pictureElement = pictureTemplate.cloneNode(true);
   pictureElement.querySelector('.picture__img').src = url;
+  pictureElement.querySelector('.picture__img').alt = description;
   pictureElement.querySelector('.picture__comments').textContent = comments.length;
   pictureElement.querySelector('.picture__likes').textContent = likes;
   pictureListFragment.appendChild(pictureElement);
 });
 
+
+
 picturesList.appendChild(pictureListFragment);
 
 
+
+export { createPhotoArray };
 
 
 /*
