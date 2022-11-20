@@ -17,7 +17,6 @@ const getRandomDigit = (minValue, maxValue) => {
 
   return (minValue + randomForDifference);
 }
-
 getRandomDigit(1, 5);
 
 
