@@ -79,4 +79,6 @@ const getPhotoObjectArray = () => {
 
 const createPhotoArray = getPhotoObjectArray();
 
+console.log(createPhotoArray);
+
 export { createPhotoArray };

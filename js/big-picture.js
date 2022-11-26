@@ -61,12 +61,6 @@ const closeBigPictureWindow = () => {
 
 
 
-//   ****************  ОСНОВНОй КОД  *******************    //
-/*
-for (let i = 0; i < currentPictures.length; i++) {                                     //Перебираем все картинки на экране - определяем что будет с каждой из них если нажать на нее
-  createBigPicturePopup(currentPictures[i], createPhotoArray[i].comments);
-
-}*/
 
 bigPictureCancelButton.addEventListener('click', closeBigPictureWindow);           //Обработчик на закрытие окна при нажатии на крестик большого фото
 
