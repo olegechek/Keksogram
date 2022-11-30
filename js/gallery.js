@@ -21,17 +21,8 @@ createPhotoArray.forEach(({ url, likes, comments, description }) => {
   });
 
 
-
-
-
-
   pictureListFragment.appendChild(pictureElement);
 });
 
 picturesList.appendChild(pictureListFragment);
 
-
-
-//currentPicture.addEventListener('click', (evt) => {                              //Функция вызова окна большой картинки по клику на каждую маленькую картинку
-//evt.preventDefault();
-//});
