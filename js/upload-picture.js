@@ -1,19 +1,12 @@
-const newPhotoInput = document.querySelector('#upload-file');     //Взял поле для загрузки файлов-фотографий
-
-const uploadContainer = document.querySelector('.img-upload__overlay');  //Взял попап, который появляется после загрузки нового фото
-
-const uploadContainerClose = uploadContainer.querySelector('.img-upload__cancel');  // Взял кнопку закрытия попапа
-
-const escapeKeys = { ESC: 'Esc', ESCAPE: 'Escape' };
-
-
 
 // ФУНКЦИЯ ЗАКРЫТИЯ ОКНА ПОПАПА
 const closeUploadContainer = () => {
+  const newPhotoInput = document.querySelector('.img-upload__input');     //Взял поле для загрузки файлов-фотографий
+  const uploadContainer = document.querySelector('.img-upload__overlay');  //Взял попап, который появляется после загрузки нового фото
+
   uploadContainer.classList.add('hidden');
   document.querySelector('body').classList.remove('modal-open');
   newPhotoInput.value = '';
-  console.log('Функция отработала');
 }
 
 
@@ -38,7 +31,6 @@ const createPicture = () => {
   };
 
   const effectStyle = `filter: ${effectNameFormula[effectName.value]}`;
-  console.log(effectStyle);
 
   const transformStyle = `transform:scale(${scale.value})`;                     // завели в переменную цифру масштаба
 
@@ -55,7 +47,6 @@ const createPicture = () => {
 }
 
 
-
 // ФУНКЦИЯ ПЕРЕДАЧИ НАЧАЛЬНЫХ НАСТРОЕК РАЗМЕТКЕ ПРИ ОТКРЫТИИ ПОПАПА (масштаб, стиль, слайдер)
 const getInitialTunes = () => {
   document.querySelector('#effect-none').checked = true;                // Установил активную радиокнопку на первом окошке
@@ -65,12 +56,9 @@ const getInitialTunes = () => {
   const effectLevel = document.querySelector('.effect-level__value'); // Узел где в value хранится уровень еффекта
   scaleValue.value = 1;
   effectName.setAttribute('value', 'none');
-  console.log(effectName.value);
   effectLevel.setAttribute('value', 1);
   createPicture();
 }
-
-
 
 
 // фУНКЦИЯ ПЕРЕКЛЮЧЕНИЯ КНОПОК МАСШТАБА
@@ -83,7 +71,6 @@ const defineScale = () => {
   smallerButton.addEventListener('click', () => {
     if (scale.value > 0.25) {
       scale.value -= 0.25;
-      console.log(scale.value);
     } else {
       scale.value = 0.25;
     }
@@ -92,7 +79,6 @@ const defineScale = () => {
   biggerButton.addEventListener('click', () => {
     if (scale.value < 1) {
       scale.value += 0.25;
-      console.log(scale.value);
     } else {
       scale.value = 1;
     }
@@ -106,8 +92,7 @@ const defineEffect = () => {
 
   const effectsList = document.querySelector('.effects__list');          //Узел контроля радиокнопок
 
-  effectsList.addEventListener('change', (evt) => {                         //При смене радиокнопки обновляется отрисовка
-    console.log('Теперь ' + evt.target.value);
+  effectsList.addEventListener('change', () => {                         //При смене радиокнопки обновляется отрисовка
     createPicture();
   });
 }
@@ -120,12 +105,12 @@ const showSlider = () => {
   let effectName = document.querySelector('.effects__radio:checked');    // Узел выбраной радиокнопки
 
   const effectNameData = {
-    none: { min: 0, max: 1, start: 1, step: 0.1, measure: '', effect: 'none' },
-    chrome: { min: 0, max: 1, start: 1, step: 0.1, measure: '', effect: 'grayscale' },
-    sepia: { min: 0, max: 1, start: 1, step: 0.1, measure: '', effect: 'sepia' },
-    marvin: { min: 0, max: 100, start: 100, step: 1, measure: '%', effect: 'invert' },
-    phobos: { min: 0, max: 3, start: 3, step: 0.1, measure: 'px', effect: 'blur' },
-    heat: { min: 1, max: 3, start: 3, step: 0.1, measure: '', effect: 'brightness' },
+    none: { min: 0, max: 1, start: 1, step: 0.1 },
+    chrome: { min: 0, max: 1, start: 1, step: 0.1 },
+    sepia: { min: 0, max: 1, start: 1, step: 0.1 },
+    marvin: { min: 0, max: 100, start: 100, step: 1 },
+    phobos: { min: 0, max: 3, start: 3, step: 0.1 },
+    heat: { min: 1, max: 3, start: 3, step: 0.1 },
   };
 
   noUiSlider.create(sliderElement, {                                     //Первичная отрисовка слайдера
@@ -136,7 +121,7 @@ const showSlider = () => {
     start: effectNameData[effectName.value].start,
     step: effectNameData[effectName.value].step,
     connect: 'lower',
-    format: {
+    format: {                                                           //Лабуда из документации чтобы дроби после точки не скакали
       to: function (value) {
         if (Number.isInteger(value)) {
           return value.toFixed(0);
@@ -150,12 +135,11 @@ const showSlider = () => {
   });
 
 
-  effectsList.addEventListener('change', (evt) => {                         //При смене радиокнопки обновляются данные слайдера
-    console.log(evt.target.value);
+  effectsList.addEventListener('change', () => {                            //При смене радиокнопки обновляются данные слайдера
 
-    effectName = document.querySelector('.effects__radio:checked');      //Узел выбраной радиокнопки
+    effectName = document.querySelector('.effects__radio:checked');         //Узел выбраной радиокнопки
 
-    sliderElement.noUiSlider.updateOptions({                             //Обновление слайдера
+    sliderElement.noUiSlider.updateOptions({                                //Обновление слайдера
       range: {
         min: effectNameData[effectName.value].min,
         max: effectNameData[effectName.value].max,
@@ -168,19 +152,23 @@ const showSlider = () => {
   });
 
 
-  sliderElement.noUiSlider.on('update', (values, handle) => {
+  sliderElement.noUiSlider.on('update', (values, handle) => {             // Обрабочик движения флажка слайдера
     const effectLevel = document.querySelector('.effect-level__value');   // Узел где в value хранится уровень еффекта
     const valueElement = values[handle];
     effectLevel.setAttribute('value', valueElement);
-    console.log(effectLevel.value);
     createPicture();
   });
 }
 
 
 
-
 //*****     ОСНОВНОЕ   ТЕЛО    ПРОГРАММЫ    ******//
+
+const newPhotoInput = document.querySelector('.img-upload__input');     //Взял поле для загрузки файлов-фотографий
+const uploadContainer = document.querySelector('.img-upload__overlay');  //Взял попап, который появляется после загрузки нового фото
+const uploadContainerClose = uploadContainer.querySelector('.img-upload__cancel');  // Взял кнопку закрытия попапа
+const escapeKeys = { ESC: 'Esc', ESCAPE: 'Escape' };
+
 
 newPhotoInput.addEventListener('change', () => {       //Обрабочик на открытие попапа при изменении в содержимом поля загрузки файлов
   uploadContainer.classList.remove('hidden');
@@ -189,11 +177,10 @@ newPhotoInput.addEventListener('change', () => {       //Обрабочик на
 });
 
 
-uploadContainerClose.addEventListener('click', closeUploadContainer);             //Обработчик на закрытие попапа при нажатии на крестик выхода
+uploadContainerClose.addEventListener('click', closeUploadContainer);         //Обработчик на закрытие попапа при нажатии на крестик выхода
 window.addEventListener('keydown', (evt) => {
-  evt.preventDefault();                                    //Обработчик на закрытие попапа при нажатии на клавишу ESC
+  evt.preventDefault();                                                       //Обработчик на закрытие попапа при нажатии на клавишу ESC
   if (evt.key === escapeKeys.ESC || evt.key === escapeKeys.ESCAPE) {
-    console.log('Кнопка сработала');
     closeUploadContainer();
   }
 });
@@ -203,6 +190,3 @@ defineScale();
 defineEffect();
 showSlider();
 
-
-console.log(newPhotoInput);
-console.log(uploadContainer);
