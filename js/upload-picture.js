@@ -178,9 +178,9 @@ newPhotoInput.addEventListener('change', () => {       //Обрабочик на
 
 
 uploadContainerClose.addEventListener('click', closeUploadContainer);         //Обработчик на закрытие попапа при нажатии на крестик выхода
-window.addEventListener('keydown', (evt) => {
-  evt.preventDefault();                                                       //Обработчик на закрытие попапа при нажатии на клавишу ESC
+window.addEventListener('keydown', (evt) => {                                 //Обработчик на закрытие попапа при нажатии на клавишу ESC
   if (evt.key === escapeKeys.ESC || evt.key === escapeKeys.ESCAPE) {
+    evt.preventDefault();
     closeUploadContainer();
   }
 });

@@ -53,4 +53,30 @@ const checkStringLength = (stringGiven, lengthGiven) => {
 checkStringLength('Ура Ура Ура', 10);
 
 
-export {getRandomDigit, getRandomDigitArray}
+
+
+/*const checkHashTagSymbols = (word) => {
+  const string = ('#01234567890ABCDEFGHIJKLMNOPQRSTUVWXYZАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ');
+  let flag = true;
+  for (let i = 0; i < word.length; i++) {
+    //const pattern = RegExp(word[i], 'ig');
+    const pattern = new RegExp(word.toUpperCase()[i]);
+    const result = pattern.test(string);
+    if (result === false) {
+      flag = false;
+    }
+  }
+  return flag
+}*/
+
+
+
+//console.log(compareArrayElements(['Жоп', 'жОпа', 'Жопа']));
+
+//console.log(checkHashTagSymbols('У35а3*++++'));
+
+
+
+
+
+export { getRandomDigit, getRandomDigitArray }
